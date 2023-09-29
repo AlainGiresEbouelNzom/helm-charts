@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pact
+  labels:
+    app: pact
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pact
+  template:
+    metadata:
+      labels:
+        app: pact
+    spec:
+      containers:
+      - name: pact
+        image: pactfoundation/pact-broker:2.107.0.1
+        ports:
+        - containerPort: {{ .Values.dbPort }}
